@@ -3,7 +3,6 @@ package com.example.Qly_CLB_Bilar.Controller;
 import com.example.Qly_CLB_Bilar.Entity.Position;
 import com.example.Qly_CLB_Bilar.Repository.PositionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
