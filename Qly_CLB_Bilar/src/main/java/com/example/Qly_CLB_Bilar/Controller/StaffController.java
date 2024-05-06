@@ -4,10 +4,9 @@ import com.example.Qly_CLB_Bilar.Entity.Staff;
 import com.example.Qly_CLB_Bilar.Repository.StaffRepository;
 import com.example.Qly_CLB_Bilar.Service.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 @RequestMapping("/staff")
 public class StaffController {
     @Autowired
