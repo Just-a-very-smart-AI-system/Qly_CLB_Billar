@@ -40,8 +40,7 @@ public class TableService {
         tableData.setNote(newTableData.getNote());
         tableData.setStatus(newTableData.getStatus());
         tableData.setSeats(newTableData.getSeats());
-        tableRepository.save(tableData);
-        return tableData;
+        return tableRepository.save(tableData);
     }
     public Iterable<Table_Data> GetArea(String area){
         Iterable<Table_Data> tb = GetAll();
