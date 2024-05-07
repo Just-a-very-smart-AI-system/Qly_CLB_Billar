@@ -3,10 +3,9 @@ package com.example.Qly_CLB_Bilar.Controller;
 import com.example.Qly_CLB_Bilar.Entity.Booking;
 import com.example.Qly_CLB_Bilar.Repository.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 @RequestMapping("/booking")
 public class BookingController {
     @Autowired
