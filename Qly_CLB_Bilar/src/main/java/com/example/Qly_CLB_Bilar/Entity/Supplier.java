@@ -15,9 +15,6 @@ public class Supplier {
     @Column(name = "TotalLoan", nullable = false)
     private float totalLoan;
 
-    @ManyToOne
-    @JoinColumn(name = "Goods_ID", nullable = false)
-    private Goods goods;
 
     @Column(name = "SDT", nullable = false, length = 50)
     private String sdt;
@@ -32,7 +29,6 @@ public class Supplier {
         this.supplierId = supplierId;
         this.name = name;
         this.totalLoan = totalLoan;
-        this.goods = goods;
         this.sdt = sdt;
         this.address = address;
     }
@@ -61,13 +57,6 @@ public class Supplier {
         this.totalLoan = totalLoan;
     }
 
-    public Goods getGoods() {
-        return goods;
-    }
-
-    public void setGoods(Goods goods) {
-        this.goods = goods;
-    }
 
     public String getSdt() {
         return sdt;

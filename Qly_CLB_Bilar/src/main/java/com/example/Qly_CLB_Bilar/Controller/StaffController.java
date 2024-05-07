@@ -20,15 +20,19 @@ public class StaffController {
     }
     @GetMapping("/findid/{Id}")
     public Staff FindId(@PathVariable("Id") String Id){
-        return staffRepository.findById(Id).orElseThrow(() -> new IllegalArgumentException("Không tìm thấy ID:" + Id));
+        return staffRepository.findById(Id).orElseThrow(() -> new RuntimeException("Không tìm thấy ID:" + Id));
     }
     @PostMapping("/create")
     public Staff Create(@RequestBody Staff staff){
-        return staffRepository.save(staff);
+        if(staffRepository.existsById(staff.getStaffId())){
+            throw new RuntimeException("Id đã tồn tại");
+        }
+        else return staffRepository.save(staff);
     }
     @PutMapping("/update/{Id}")
     public Staff Update(@PathVariable("Id") String Id, @RequestBody Staff newStaff){
         Staff staff = FindId(Id);
+
         staff.setAddress(newStaff.getAddress());
         staff.setBirthday(newStaff.getBirthday());
         staff.setName(newStaff.getName());

@@ -2,6 +2,7 @@ package com.example.Qly_CLB_Bilar.Entity;
 
 import com.example.Qly_CLB_Bilar.Entity.Enum.Gender;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
 
@@ -17,7 +18,6 @@ public class Staff {
 
     @Column(name = "Name", nullable = false, length = 50)
     private String name;
-
     @Column(name = "SDT", nullable = false, length = 10)
     private String sdt;
 
