@@ -25,10 +25,10 @@ public class Customer {
     @Column(name = "MoneyPaid", nullable = false)
     private float moneyPaid;
 
-    @Column(name = "Birthday")
+    @Column(name = "Birthday", nullable = false)
     private LocalDate birthday;
 
-    @Column(name = "TotalMoney")
+    @Column(name = "TotalMoney", nullable = false)
     private Float totalMoney;
 
     @Column(name = "SDT", nullable = false, length = 10)

@@ -7,11 +7,14 @@ import jakarta.persistence.*;
 public class ListBill {
 
     @Id
-    @Column(name = "Bill_ID", nullable = false, length = 50)
-    private String billId;
-
-    @Column(name = "Customer_ID", nullable = false, length = 50)
-    private String customerId;
+    @Column(name = "list_id", nullable = false, length = 50)
+    private String list_id;
+    @ManyToOne
+    @JoinColumn(name = "Bill_ID", nullable = false)
+    private Bill bill;
+    @ManyToOne
+    @JoinColumn(name = "Customer_ID", nullable = false)
+    private Customer customer;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "PayMethod", nullable = false, length = 20)
@@ -26,28 +29,36 @@ public class ListBill {
     public ListBill() {
     }
 
-    public ListBill(String billId, String customerId, PaymentMethod payMethod, float change, float totalMoney) {
-        this.billId = billId;
-        this.customerId = customerId;
+    public ListBill(Bill bill, Customer customer, PaymentMethod payMethod, float change, float totalMoney) {
+        this.bill = bill;
+        this.customer = customer;
         this.payMethod = payMethod;
         this.change = change;
         this.totalMoney = totalMoney;
     }
 
-    public String getBillId() {
-        return billId;
+    public String getList_id() {
+        return list_id;
     }
 
-    public void setBillId(String billId) {
-        this.billId = billId;
+    public void setList_id(String list_id) {
+        this.list_id = list_id;
     }
 
-    public String getCustomerId() {
-        return customerId;
+    public Bill getBill() {
+        return bill;
     }
 
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
+    public void setBill(Bill billId) {
+        this.bill = billId;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customerId) {
+        this.customer = customerId;
     }
 
     public PaymentMethod getPayMethod() {
