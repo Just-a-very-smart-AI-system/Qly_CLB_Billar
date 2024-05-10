@@ -1,37 +1,21 @@
 package com.example.Qly_CLB_Bilar.DTO;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class ApiResponse<T> {
-    private int code;
-    private String message;
-    private T response;
+    int code;
+    String message;
+    T response;
 
-    public ApiResponse() {
-    }
 
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public T getResponse() {
-        return response;
-    }
-
-    public void setResponse(T response) {
-        this.response = response;
-    }
 }

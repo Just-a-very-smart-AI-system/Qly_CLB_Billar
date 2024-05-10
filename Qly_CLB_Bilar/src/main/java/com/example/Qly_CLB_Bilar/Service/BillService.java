@@ -1,6 +1,8 @@
 package com.example.Qly_CLB_Bilar.Service;
 
+import com.example.Qly_CLB_Bilar.DTO.BillRequset;
 import com.example.Qly_CLB_Bilar.Entity.Bill;
+import com.example.Qly_CLB_Bilar.Mapper.BillMapper;
 import com.example.Qly_CLB_Bilar.Repository.BillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
@@ -11,6 +13,8 @@ import org.springframework.stereotype.Service;
 public class BillService {
     @Autowired
     private BillRepository billRepository;
+    @Autowired
+    private BillMapper billMapper;
 
     public Iterable<Bill> GetAll() {
         return billRepository.findAll();
@@ -22,15 +26,8 @@ public class BillService {
         return billRepository.save(bill);
     }
 
-    public Bill Update(Bill updatedBill, String Id){
-        Bill bill = FindId(Id);
-        bill.setBillId(updatedBill.getBillId());
-        bill.setNote(updatedBill.getNote());
-        bill.setCost(updatedBill.getCost());
-        bill.setPaid(updatedBill.getPaid());
-        bill.setDiscount(updatedBill.getDiscount());
-        bill.setTimeArrive(updatedBill.getTimeArrive());
-        bill.setTimeOut(updatedBill.getTimeOut());
+    public Bill Update(BillRequset updatedBill){
+        Bill bill = billMapper.toBill(updatedBill);
         billRepository.save(bill);
         return bill;
     }

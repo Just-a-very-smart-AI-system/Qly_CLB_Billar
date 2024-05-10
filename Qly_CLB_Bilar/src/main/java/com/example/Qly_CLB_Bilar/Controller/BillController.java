@@ -1,5 +1,6 @@
 package com.example.Qly_CLB_Bilar.Controller;
 
+import com.example.Qly_CLB_Bilar.DTO.BillRequset;
 import com.example.Qly_CLB_Bilar.Entity.Bill;
 import com.example.Qly_CLB_Bilar.Repository.BillRepository;
 import com.example.Qly_CLB_Bilar.Service.BillService;
@@ -37,9 +38,9 @@ public class BillController {
         billService.Delete(Id);
     }
 
-    @PutMapping("/update/{Id}")
-    public Bill Update(@RequestBody Bill bill, @PathVariable("Id") String Id){
-        return billService.Update(bill,Id);
+    @PutMapping("/update")
+    public Bill Update(@RequestBody BillRequset bill){
+        return billService.Update(bill);
     }
 
 
