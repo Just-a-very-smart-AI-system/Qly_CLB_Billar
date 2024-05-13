@@ -22,14 +22,15 @@ public class BillService {
     public Bill FindId(String Id){
         return billRepository.findById(Id).orElseThrow(() -> new IllegalArgumentException("Không tìm thấy ID:" + Id));
     }
-    public Bill CreateBill(Bill bill){
+    public Bill CreateBill(BillRequset updatedBill){
+        Bill bill = billMapper.toBill(updatedBill);
         return billRepository.save(bill);
     }
 
-    public Bill Update(BillRequset updatedBill){
-        Bill bill = billMapper.toBill(updatedBill);
-        billRepository.save(bill);
-        return bill;
+    public Bill Update(String Id, BillRequset updatedBill){
+        Bill bill = FindId(Id);
+        bill = billMapper.toBill(updatedBill);
+        return billRepository.save(bill);
     }
     public void Delete(String Id){
         if(billRepository.existsById(Id)){
@@ -39,5 +40,6 @@ public class BillService {
             throw new IllegalArgumentException("Không tìm thấy bill có ID: " + Id);
         }
     }
+
     
 }

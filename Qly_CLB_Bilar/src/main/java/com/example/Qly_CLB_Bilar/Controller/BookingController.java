@@ -17,7 +17,7 @@ public class BookingController {
     }
     @GetMapping("/findId/{Id}")
     public Booking FindId(@PathVariable("Id") String Id){
-        return bookingRepository.findById(Id).orElseThrow(() -> new IllegalArgumentException("Không tìm thấy ID:" + Id));
+        return bookingRepository.findById(Id).orElseThrow(() -> new RuntimeException("Không tìm thấy ID:" + Id));
     }
     @PostMapping("/create")
     public Booking Create(@RequestBody Booking booking){

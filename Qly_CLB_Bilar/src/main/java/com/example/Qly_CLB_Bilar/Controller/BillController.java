@@ -29,7 +29,7 @@ public class BillController {
     }
 
     @PostMapping("/create")
-    public Bill Create(@RequestBody Bill bill){
+    public Bill Create(@RequestBody BillRequset bill){
         return billService.CreateBill(bill);
     }
 
@@ -38,9 +38,9 @@ public class BillController {
         billService.Delete(Id);
     }
 
-    @PutMapping("/update")
-    public Bill Update(@RequestBody BillRequset bill){
-        return billService.Update(bill);
+    @PutMapping("/update/{Id}")
+    public Bill Update(@PathVariable("Id") String Id, @RequestBody BillRequset bill){
+        return billService.Update(Id, bill);
     }
 
 
