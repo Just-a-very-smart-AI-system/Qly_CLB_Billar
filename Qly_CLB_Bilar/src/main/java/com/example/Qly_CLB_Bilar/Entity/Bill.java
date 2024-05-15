@@ -3,6 +3,7 @@ package com.example.Qly_CLB_Bilar.Entity;
 import com.example.Qly_CLB_Bilar.Entity.Enum.BillStatus;
 import jakarta.persistence.*;
 
+import java.sql.Date;
 import java.time.LocalTime;
 
 @Entity
@@ -33,7 +34,8 @@ public class Bill {
 
     @Column(name = "Paid", nullable = false)
     private float paid;
-
+    @Column(name = "date")
+    private Date date;
     public Bill(String billId, LocalTime timeArrive, LocalTime timeOut, BillStatus status, String note, float cost, float discount, float paid) {
         this.billId = billId;
         this.TimeArrive = timeArrive;
@@ -46,6 +48,14 @@ public class Bill {
     }
 
     public Bill() {
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public String getBillId() {
