@@ -32,12 +32,12 @@ public class BillController {
     public Iterable<Bill> FindByStatust(@PathVariable("status") boolean status){
         return billService.FindStatust(status);
     }
-    @GetMapping("/findpaid/{paid}")
-    public Iterable<Bill> FindByPaid(@PathVariable("paid") float paid){
+    @GetMapping("/findpaid")
+    public Iterable<Bill> FindByPaid(@RequestParam("paid") float paid){
         return billService.FindByPaid(paid);
     }
-    @GetMapping("/finddate/{date}")
-    public Iterable<Bill>FindByDate(@PathVariable("date")LocalDate date){
+    @GetMapping("/finddate")
+    public Iterable<Bill>FindByDate(@RequestParam("date")LocalDate date){
         return billService.FindByDate(date);
     }
     @GetMapping("/findatebw")
@@ -62,6 +62,5 @@ public class BillController {
     public Bill Update(@PathVariable("Id") String Id, @RequestBody BillRequset bill){
         return billService.Update(Id, bill);
     }
-
 
 }

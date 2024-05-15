@@ -22,7 +22,7 @@ public class Booking {
 
     @ManyToOne
     @JoinColumn(name = "Table_ID", nullable = false)
-    private Table_Data Table_Data;
+    private Table_Data tableData;
 
     @Column(name = "TimeArrive", nullable = false)
     private LocalTime timeArrive;
@@ -46,7 +46,7 @@ public class Booking {
         this.bookingId = bookingId;
         this.customer = customer;
         this.staff = staff;
-        Table_Data = tableData;
+        this.tableData = tableData;
         this.timeArrive = timeArrive;
         this.timePlay = timePlay;
         this.note = note;
@@ -86,11 +86,11 @@ public class Booking {
     }
 
     public Table_Data getTable() {
-        return Table_Data;
+        return tableData;
     }
 
     public void setTable(Table_Data tableData) {
-        Table_Data = tableData;
+        this.tableData = tableData;
     }
 
     public LocalTime getTimeArrive() {
