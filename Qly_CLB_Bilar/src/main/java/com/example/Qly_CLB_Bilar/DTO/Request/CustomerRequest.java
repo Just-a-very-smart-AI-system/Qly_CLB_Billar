@@ -1,7 +1,6 @@
-package com.example.Qly_CLB_Bilar.DTO;
+package com.example.Qly_CLB_Bilar.DTO.Request;
 
 import com.example.Qly_CLB_Bilar.Entity.Enum.Gender;
-import com.example.Qly_CLB_Bilar.Entity.Position;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,15 +13,21 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 
-public class StaffRequest {
-    private String staffId;
-    private Position position;
+public class CustomerRequest {
+    private String customerId;
+
     private String name;
-    private String sdt;
-    private LocalDate dateStart;
-    private LocalDate birthday;
+
     private String address;
+
     private Gender gender;
-    private int timeWorking;
+
+    private float moneyPaid;
+
+    private LocalDate birthday;
+
+    private Float totalMoney;
+
+    private String sdt;
 
 }

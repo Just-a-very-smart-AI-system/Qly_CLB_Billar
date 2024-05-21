@@ -1,6 +1,6 @@
 package com.example.Qly_CLB_Bilar.Mapper;
 
-import com.example.Qly_CLB_Bilar.DTO.PayrollRequest;
+import com.example.Qly_CLB_Bilar.DTO.Request.PayrollRequest;
 import com.example.Qly_CLB_Bilar.Entity.Payroll;
 import org.mapstruct.Mapper;
 

@@ -1,6 +1,6 @@
 package com.example.Qly_CLB_Bilar.Service;
 
-import com.example.Qly_CLB_Bilar.DTO.DetailBillRequest;
+import com.example.Qly_CLB_Bilar.DTO.Request.DetailBillRequest;
 import com.example.Qly_CLB_Bilar.Entity.DetailBill;
 import com.example.Qly_CLB_Bilar.Mapper.DetailBillMapper;
 import com.example.Qly_CLB_Bilar.Repository.DetailBillRepository;

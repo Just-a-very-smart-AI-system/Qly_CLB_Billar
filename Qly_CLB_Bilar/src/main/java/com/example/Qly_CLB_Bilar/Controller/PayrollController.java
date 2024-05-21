@@ -1,6 +1,6 @@
 package com.example.Qly_CLB_Bilar.Controller;
 
-import com.example.Qly_CLB_Bilar.DTO.PayrollRequest;
+import com.example.Qly_CLB_Bilar.DTO.Request.PayrollRequest;
 import com.example.Qly_CLB_Bilar.Entity.Payroll;
 import com.example.Qly_CLB_Bilar.Service.PayrollService;
 import org.springframework.beans.factory.annotation.Autowired;

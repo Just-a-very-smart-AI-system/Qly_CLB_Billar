@@ -1,6 +1,6 @@
 package com.example.Qly_CLB_Bilar.Service;
 
-import com.example.Qly_CLB_Bilar.DTO.PayrollRequest;
+import com.example.Qly_CLB_Bilar.DTO.Request.PayrollRequest;
 import com.example.Qly_CLB_Bilar.Entity.Payroll;
 import com.example.Qly_CLB_Bilar.Mapper.PayrollMapper;
 import com.example.Qly_CLB_Bilar.Repository.PayrollRepository;

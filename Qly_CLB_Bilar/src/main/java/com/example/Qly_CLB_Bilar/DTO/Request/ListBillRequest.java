@@ -1,4 +1,4 @@
-package com.example.Qly_CLB_Bilar.DTO;
+package com.example.Qly_CLB_Bilar.DTO.Request;
 
 import com.example.Qly_CLB_Bilar.Entity.Bill;
 import com.example.Qly_CLB_Bilar.Entity.Customer;

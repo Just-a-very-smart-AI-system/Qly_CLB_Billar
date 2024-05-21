@@ -1,6 +1,5 @@
-package com.example.Qly_CLB_Bilar.DTO;
+package com.example.Qly_CLB_Bilar.DTO.Request;
 
-import com.example.Qly_CLB_Bilar.Entity.Enum.SalaryType;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,8 +10,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 
-public class PositionRequest {
-    private String positionId;
-    private SalaryType typeSalary;
-    private float paidHour;
+public class SupplierRequest {
+    private String supplierId;
+    private String name;
+    private float totalLoan;
+    private String sdt;
+    private String address;
 }

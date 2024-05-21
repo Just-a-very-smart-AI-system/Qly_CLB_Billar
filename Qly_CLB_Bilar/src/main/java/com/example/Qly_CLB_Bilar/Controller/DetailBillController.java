@@ -1,6 +1,6 @@
 package com.example.Qly_CLB_Bilar.Controller;
 
-import com.example.Qly_CLB_Bilar.DTO.DetailBillRequest;
+import com.example.Qly_CLB_Bilar.DTO.Request.DetailBillRequest;
 import com.example.Qly_CLB_Bilar.Entity.DetailBill;
 import com.example.Qly_CLB_Bilar.Service.DetailBillService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -14,10 +14,6 @@ public class Payroll {
     @JoinColumn(name = "Staff_ID", nullable = false)
     private Staff staff;
 
-    @ManyToOne
-    @JoinColumn(name = "Position_ID", nullable = false)
-    private Position position;
-
     @Column(name = "Date", nullable = false)
     private LocalDate date;
 
@@ -27,7 +23,6 @@ public class Payroll {
     public Payroll(String payrollId, Staff staff, Position position, LocalDate date, float totalMoney) {
         this.payrollId = payrollId;
         this.staff = staff;
-        this.position = position;
         this.date = date;
         this.totalMoney = totalMoney;
     }
@@ -51,13 +46,6 @@ public class Payroll {
         this.staff = staff;
     }
 
-    public Position getPosition() {
-        return position;
-    }
-
-    public void setPosition(Position position) {
-        this.position = position;
-    }
 
     public LocalDate getDate() {
         return date;

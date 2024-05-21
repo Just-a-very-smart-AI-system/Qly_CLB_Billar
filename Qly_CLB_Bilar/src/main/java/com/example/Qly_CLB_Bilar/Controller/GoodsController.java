@@ -1,6 +1,6 @@
 package com.example.Qly_CLB_Bilar.Controller;
 
-import com.example.Qly_CLB_Bilar.DTO.GoodsRequest;
+import com.example.Qly_CLB_Bilar.DTO.Request.GoodsRequest;
 import com.example.Qly_CLB_Bilar.Entity.Goods;
 import com.example.Qly_CLB_Bilar.Mapper.GoodsMapper;
 import com.example.Qly_CLB_Bilar.Repository.GoodsRepository;

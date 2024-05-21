@@ -1,6 +1,6 @@
 package com.example.Qly_CLB_Bilar.Exception;
 
-import com.example.Qly_CLB_Bilar.DTO.ApiResponse;
+import com.example.Qly_CLB_Bilar.DTO.Response.ApiResponse;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

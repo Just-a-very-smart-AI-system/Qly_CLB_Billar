@@ -1,4 +1,4 @@
-package com.example.Qly_CLB_Bilar.DTO;
+package com.example.Qly_CLB_Bilar.DTO.Request;
 
 import com.example.Qly_CLB_Bilar.Entity.Position;
 import com.example.Qly_CLB_Bilar.Entity.Staff;
@@ -17,7 +17,6 @@ import java.time.LocalDate;
 public class PayrollRequest {
     private String payrollId;
     private Staff staff;
-    private Position position;
     private LocalDate date;
     private float totalMoney;
 

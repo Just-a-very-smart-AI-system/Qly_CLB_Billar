@@ -14,10 +14,10 @@ public class Bill {
     private String billId;
 
     @Column(name = "time_arrive", nullable = false)
-    private LocalTime TimeArrive;
+    private LocalTime time_arrive;
 
     @Column(name = "time_out")
-    private LocalTime TimeOut;
+    private LocalTime time_out;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "Status", nullable = false, length = 20)
@@ -36,10 +36,13 @@ public class Bill {
     private float paid;
     @Column(name = "date")
     private Date date;
-    public Bill(String billId, LocalTime timeArrive, LocalTime timeOut, BillStatus status, String note, float cost, float discount, float paid) {
+    @ManyToOne
+    @JoinColumn(name = "customer_id" )
+    private Customer customer;
+    public Bill(String billId, LocalTime timearrive, LocalTime timeOut, BillStatus status, String note, float cost, float discount, float paid) {
         this.billId = billId;
-        this.TimeArrive = timeArrive;
-        this.TimeOut = timeOut;
+        this.time_arrive = timearrive;
+        this.time_out = timeOut;
         this.status = status;
         this.note = note;
         this.cost = cost;
@@ -48,6 +51,14 @@ public class Bill {
     }
 
     public Bill() {
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     public Date getDate() {
@@ -66,20 +77,20 @@ public class Bill {
         this.billId = billId;
     }
 
-    public LocalTime getTimeArrive() {
-        return TimeArrive;
+    public LocalTime getTime_arrive() {
+        return time_arrive;
     }
 
-    public void setTimeArrive(LocalTime timeArrive) {
-        this.TimeArrive = timeArrive;
+    public void setTime_arrive(LocalTime time_arrive) {
+        this.time_arrive = time_arrive;
     }
 
-    public LocalTime getTimeOut() {
-        return TimeOut;
+    public LocalTime getTime_out() {
+        return time_out;
     }
 
-    public void setTimeOut(LocalTime timeOut) {
-        this.TimeOut = timeOut;
+    public void setTime_out(LocalTime time_out) {
+        this.time_out = time_out;
     }
 
     public BillStatus getStatus() {

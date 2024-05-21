@@ -1,7 +1,8 @@
-package com.example.Qly_CLB_Bilar.DTO;
+package com.example.Qly_CLB_Bilar.DTO.Request;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,11 +10,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-
-public class SupplierRequest {
-    private String supplierId;
-    private String name;
-    private float totalLoan;
-    private String sdt;
-    private String address;
+@Builder
+public class LogInRequest {
+    private String user_name;
+    private String password;
 }

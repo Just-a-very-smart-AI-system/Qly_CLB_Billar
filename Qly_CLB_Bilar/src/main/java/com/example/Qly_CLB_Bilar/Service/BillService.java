@@ -1,14 +1,16 @@
 package com.example.Qly_CLB_Bilar.Service;
 
-import com.example.Qly_CLB_Bilar.DTO.BillRequset;
+import com.example.Qly_CLB_Bilar.DTO.Request.BillRequset;
 import com.example.Qly_CLB_Bilar.Entity.Bill;
+import com.example.Qly_CLB_Bilar.Entity.Customer;
+import com.example.Qly_CLB_Bilar.Entity.DetailBill;
 import com.example.Qly_CLB_Bilar.Mapper.BillMapper;
 import com.example.Qly_CLB_Bilar.Repository.BillRepository;
+import com.example.Qly_CLB_Bilar.Repository.DetailBillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -23,7 +25,11 @@ public class BillService {
     @Autowired
     private BillRepository billRepository;
     @Autowired
+    private DetailBillRepository detailBillRepository;
+    @Autowired
     private BillMapper billMapper;
+    @Autowired
+    private CustomerService customerService;
 
     public Iterable<Bill> GetAll() {
         return billRepository.findAll();
@@ -32,13 +38,19 @@ public class BillService {
         return billRepository.findById(Id).orElseThrow(() -> new IllegalArgumentException("Không tìm thấy ID:" + Id));
     }
     public Bill CreateBill(BillRequset updatedBill){
+        Customer customer = customerService.FindById(updatedBill.getCustomerId());
+
         Bill bill = billMapper.toBill(updatedBill);
+        bill.setCustomer(customer);
         return billRepository.save(bill);
     }
 
     public Bill Update(String Id, BillRequset updatedBill){
         Bill bill = FindId(Id);
+        Customer customer = customerService.FindById(updatedBill.getCustomerId());
+
         bill = billMapper.toBill(updatedBill);
+        bill.setCustomer(customer);
         return billRepository.save(bill);
     }
     public void Delete(String Id){
@@ -86,6 +98,9 @@ public class BillService {
             return list;
         }
     }
+    public Iterable<Bill> FindByCustomer(Customer customer){
+        return billRepository.findByCustomer(customer);
+    }
     public Iterable<Bill> FindByTime(LocalDate date, LocalTime start, LocalTime end){
         Timestamp currentTime = new Timestamp(System.currentTimeMillis());
         List<Bill> list = billRepository.findBillByTime(date, start, end);
@@ -98,5 +113,8 @@ public class BillService {
         else{
             return list;
         }
+    }
+    public Iterable<DetailBill> FindDetailBill(Bill bill){
+        return detailBillRepository.findByBill(bill);
     }
 }

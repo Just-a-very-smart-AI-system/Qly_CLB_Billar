@@ -1,5 +1,6 @@
-package com.example.Qly_CLB_Bilar.DTO;
+package com.example.Qly_CLB_Bilar.DTO.Request;
 
+import com.example.Qly_CLB_Bilar.Entity.Customer;
 import com.example.Qly_CLB_Bilar.Entity.Enum.BillStatus;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.Column;
@@ -21,9 +22,9 @@ public class BillRequset {
 
     private String billId;
 
-    private LocalTime TimeArrive;
+    private LocalTime time_arrive;
 
-    private LocalTime TimeOut;
+    private LocalTime time_out;
 
     private BillStatus status;
 
@@ -37,4 +38,7 @@ public class BillRequset {
 
     private Date date;
 
+    private Customer customer;
+
+    private String customerId;
 }

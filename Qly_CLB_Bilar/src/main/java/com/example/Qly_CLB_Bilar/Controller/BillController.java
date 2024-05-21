@@ -1,17 +1,15 @@
 package com.example.Qly_CLB_Bilar.Controller;
 
-import com.example.Qly_CLB_Bilar.DTO.BillRequset;
+import com.example.Qly_CLB_Bilar.DTO.Request.BillRequset;
 import com.example.Qly_CLB_Bilar.Entity.Bill;
-import com.example.Qly_CLB_Bilar.Repository.BillRepository;
+import com.example.Qly_CLB_Bilar.Entity.Customer;
+import com.example.Qly_CLB_Bilar.Entity.DetailBill;
 import com.example.Qly_CLB_Bilar.Service.BillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Calendar;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/bill")
@@ -47,6 +45,14 @@ public class BillController {
     @GetMapping("/findtime")
     public Iterable<Bill> FindByTime(@RequestParam() LocalDate date, @RequestParam() LocalTime start , @RequestParam() LocalTime end){
         return billService.FindByTime(date, start, end);
+    }
+    @GetMapping("/findcustomer/{Id}")
+    public Iterable<Bill> FindbyCustomer(@PathVariable("Id") Customer customer){
+        return billService.FindByCustomer(customer);
+    }
+    @GetMapping("/getdetail/{Id}")
+    public Iterable<DetailBill> FindDetailBill(@PathVariable("Id") Bill bill){
+        return billService.FindDetailBill(bill);
     }
     @PostMapping("/create")
     public Bill Create(@RequestBody BillRequset bill){

@@ -1,6 +1,6 @@
 package com.example.Qly_CLB_Bilar.Controller;
 
-import com.example.Qly_CLB_Bilar.DTO.TimeKeepingRequest;
+import com.example.Qly_CLB_Bilar.DTO.Request.TimeKeepingRequest;
 import com.example.Qly_CLB_Bilar.Entity.TimeKeeping;
 import com.example.Qly_CLB_Bilar.Service.TimeKeepingService;
 import org.springframework.beans.factory.annotation.Autowired;
