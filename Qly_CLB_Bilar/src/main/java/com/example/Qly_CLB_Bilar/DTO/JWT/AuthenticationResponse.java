@@ -1,4 +1,4 @@
-package com.example.Qly_CLB_Bilar.DTO.Response;
+package com.example.Qly_CLB_Bilar.DTO.JWT;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
@@ -12,5 +12,6 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 
 public class AuthenticationResponse {
+    String token;
     boolean Signed;
 }

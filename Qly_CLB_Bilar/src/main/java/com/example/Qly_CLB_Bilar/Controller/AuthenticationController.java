@@ -1,11 +1,13 @@
 package com.example.Qly_CLB_Bilar.Controller;
 
-import com.example.Qly_CLB_Bilar.DTO.Request.LogInRequest;
+import com.example.Qly_CLB_Bilar.DTO.JWT.IntrospectRequest;
+import com.example.Qly_CLB_Bilar.DTO.JWT.LogInRequest;
 import com.example.Qly_CLB_Bilar.DTO.Response.ApiResponse;
-import com.example.Qly_CLB_Bilar.DTO.Response.AuthenticationResponse;
+import com.example.Qly_CLB_Bilar.DTO.JWT.AuthenticationResponse;
+import com.example.Qly_CLB_Bilar.DTO.JWT.IntrospectResponse;
 import com.example.Qly_CLB_Bilar.Service.AuthenticationService;
+import com.nimbusds.jose.JOSEException;
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.text.ParseException;
 
 
 @RestController
@@ -22,13 +26,19 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthenticationController {
     @Autowired
     private AuthenticationService authenticationService;
-//    @PostMapping("/login")
-//    ApiResponse<AuthenticationResponse> Authenticate(@RequestBody LogInRequest logInRequest){
-//        boolean result =  authenticationService.Authenticate(logInRequest);
-//        return ApiResponse.<AuthenticationResponse>builder()
-//                .result(AuthenticationResponse.builder()
-//                        .Signed()
-//                        .build())
-//                .build();
-//    }
+    @PostMapping("/token")
+    ApiResponse<AuthenticationResponse> Authenticate(@RequestBody LogInRequest logInRequest){
+        AuthenticationResponse result =  authenticationService.Authenticate(logInRequest);
+        return ApiResponse.<AuthenticationResponse>builder()
+                .result(result)
+                .build();
+    }
+    @PostMapping("/introspect")
+    ApiResponse<IntrospectResponse> Authenticate(@RequestBody IntrospectRequest request)
+            throws ParseException, JOSEException {
+        var result =  authenticationService.introspect(request);
+        return ApiResponse.<IntrospectResponse>builder()
+                .result(result)
+                .build();
+    }
 }

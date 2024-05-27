@@ -1,6 +1,6 @@
 package com.example.Qly_CLB_Bilar.Service;
 
-import com.example.Qly_CLB_Bilar.DTO.Request.UserRequest;
+import com.example.Qly_CLB_Bilar.DTO.JWT.UserRequest;
 import com.example.Qly_CLB_Bilar.Entity.Staff;
 import com.example.Qly_CLB_Bilar.Entity.User;
 import com.example.Qly_CLB_Bilar.Mapper.UserMapper;
@@ -22,9 +22,15 @@ public class UserService {
 
     public User Create(UserRequest userRequest){
         if(userRepository.existsById(userRequest.getUser_name())){
-            throw new RuntimeException("User đã tồn tại!");
+            throw new RuntimeException("User name đã tồn tại!");
         }
-        Staff staff = staffRepository.findById(userRequest.getStaffId()).orElseThrow(()->new RuntimeException("Không tồn tại staff ID:" + userRequest.getStaffId()));
+
+        Staff staff = staffRepository.findById(userRequest.getStaffId())
+                .orElseThrow(()->new RuntimeException("Không tồn tại staff ID:" + userRequest.getStaffId()));
+
+        if(userRepository.existsByStaff(staff)){
+            throw new RuntimeException("Nhân viên đã có tài khoản!");
+        }
         User newUser = userMapper.toUser(userRequest);
         newUser.setStaff(staff);
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);

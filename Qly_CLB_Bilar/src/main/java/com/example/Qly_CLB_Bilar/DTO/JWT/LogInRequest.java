@@ -1,6 +1,6 @@
-package com.example.Qly_CLB_Bilar.DTO.Request;
+package com.example.Qly_CLB_Bilar.DTO.JWT;
 
-import com.example.Qly_CLB_Bilar.Entity.Staff;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserRequest {
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@Builder
+public class LogInRequest {
     private String user_name;
     private String password;
-    private Staff staff;
-    private String staffId;
 }
