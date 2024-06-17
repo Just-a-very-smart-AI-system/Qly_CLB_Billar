@@ -20,7 +20,13 @@ public class CustomerController {
     }
     @GetMapping("/findid/{Id}")
     public Customer FindId(@PathVariable("Id") String Id){
+        // CheclRole
         return customerRepository.findById(Id).orElseThrow(()->new RuntimeException("Không tìm thấy ID:"+ Id));
+    }
+    private boolean CheckRole(String urlendPoint,String userID)
+    {
+        // do sth
+        return true;
     }
     @PostMapping("/create")
     public Customer Craete(@RequestBody Customer customer){

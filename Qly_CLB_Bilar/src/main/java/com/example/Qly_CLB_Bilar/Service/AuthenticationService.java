@@ -4,6 +4,7 @@ import com.example.Qly_CLB_Bilar.DTO.JWT.IntrospectRequest;
 import com.example.Qly_CLB_Bilar.DTO.JWT.LogInRequest;
 import com.example.Qly_CLB_Bilar.DTO.JWT.AuthenticationResponse;
 import com.example.Qly_CLB_Bilar.DTO.JWT.IntrospectResponse;
+import com.example.Qly_CLB_Bilar.Entity.User;
 import com.example.Qly_CLB_Bilar.Repository.UserRepository;
 import com.nimbusds.jose.*;
 import com.nimbusds.jose.crypto.MACSigner;
@@ -12,21 +13,25 @@ import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.SignedJWT;
 import lombok.experimental.NonFinal;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.text.ParseException;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.Collection;
 import java.util.Date;
+import java.util.StringJoiner;
 
 @Service
 public class AuthenticationService {
     @Autowired
     private UserRepository userRepository;
-    @NonFinal
-    protected static final String SIGNER_KEY = "2CRlxW7jMBZpsCMiZmjJbP7mxVbkpTcwoa76QVM9XLlk7H7QtsInTT2M/riEj4kq";
+    @Value("${spring.security.oauth2.resourceserver.jwt.signerKey}")
+    private String SIGNER_KEY;
     public AuthenticationResponse Authenticate(LogInRequest request){
         var user = userRepository.findById(request.getUser_name())
                 .orElseThrow(()->new RuntimeException("Không tồn tại UserName:" + request.getUser_name()));
@@ -36,21 +41,22 @@ public class AuthenticationService {
         if(!authenticated){
             throw new RuntimeException("Xác minh không thành công!");
         }
-        var token = generateToken(request.getUser_name());
+        var token = generateToken(user);
 
         return AuthenticationResponse.builder()
                 .token(token)
                 .Signed(true)
                 .build();
     }
-    private String generateToken(String user_name){
+    private String generateToken(User user){
         JWSHeader header = new JWSHeader(JWSAlgorithm.HS512);
             JWTClaimsSet jwtClaimsSet = new JWTClaimsSet.Builder()
-                .subject(user_name)
+                .subject(user.getUser_name())
                 .issuer("Issued by god")
                 .issueTime(new Date())
                 .expirationTime(new Date(
                         Instant.now().plus(1, ChronoUnit.HOURS).toEpochMilli()))
+                .claim("scope", buildScope(user))
                 .build();
         Payload payload = new Payload(jwtClaimsSet.toJSONObject());
 
@@ -75,5 +81,12 @@ public class AuthenticationService {
                 .valid(verified && expTime.after(new Date()))
                 .build();
 
+    }
+    private String buildScope(User user){
+        StringJoiner stringJoiner = new StringJoiner(" ");
+        if(!CollectionUtils.isEmpty(user.getRoles())){
+            user.getRoles().forEach(s -> stringJoiner.add(s));
+        }
+        return stringJoiner.toString();
     }
 }

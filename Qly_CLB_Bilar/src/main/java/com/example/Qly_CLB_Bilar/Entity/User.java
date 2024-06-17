@@ -5,6 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.HashSet;
+import java.util.Set;
+
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,4 +22,8 @@ public class User {
     @JoinColumn(name = "Staff_ID", nullable = false)
     @ManyToOne
     private Staff staff;
+
+    @Column(name = "roles", nullable = false, length = 50)
+    @ElementCollection(fetch = FetchType.EAGER)
+    private Set<String> roles = new HashSet<>();
 }

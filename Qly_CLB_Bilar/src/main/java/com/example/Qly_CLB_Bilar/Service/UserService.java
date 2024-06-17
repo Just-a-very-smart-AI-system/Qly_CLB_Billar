@@ -1,6 +1,7 @@
 package com.example.Qly_CLB_Bilar.Service;
 
 import com.example.Qly_CLB_Bilar.DTO.JWT.UserRequest;
+import com.example.Qly_CLB_Bilar.Entity.Enum.Roles;
 import com.example.Qly_CLB_Bilar.Entity.Staff;
 import com.example.Qly_CLB_Bilar.Entity.User;
 import com.example.Qly_CLB_Bilar.Mapper.UserMapper;
@@ -10,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.HashSet;
 
 @Service
 public class UserService {
@@ -31,11 +34,21 @@ public class UserService {
         if(userRepository.existsByStaff(staff)){
             throw new RuntimeException("Nhân viên đã có tài khoản!");
         }
+
+        HashSet<String> roles = new HashSet<>();
+        roles.add(Roles.USER.name());
+        userRequest.setRoles(roles);
+
         User newUser = userMapper.toUser(userRequest);
+        newUser.setRoles(roles);
         newUser.setStaff(staff);
+
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
         newUser.setPassword(passwordEncoder.encode(userRequest.getPassword()));
 
         return userRepository.save(newUser);
+    }
+    Iterable<User> FindAll() {
+        return userRepository.findAll();
     }
 }

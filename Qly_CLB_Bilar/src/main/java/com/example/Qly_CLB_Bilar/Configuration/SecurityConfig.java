@@ -1,5 +1,7 @@
 package com.example.Qly_CLB_Bilar.Configuration;
 
+import com.example.Qly_CLB_Bilar.Entity.Enum.Roles;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -21,11 +23,13 @@ public class SecurityConfig {
             "/user/create",
             "/auth/token", "/auth/introspect"
     };
-    protected static final String signKey = "2CRlxW7jMBZpsCMiZmjJbP7mxVbkpTcwoa76QVM9XLlk7H7QtsInTT2M/riEj4kq";
+    @Value("${spring.security.oauth2.resourceserver.jwt.signerKey}")
+    private String SIGNER_KEY;
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests(request ->
                 request.requestMatchers(HttpMethod.POST, PUBLIC_ENDPOINTS).permitAll()
+                        .requestMatchers(HttpMethod.GET, "/user/getall").hasRole(Roles.ADMIN.name())
                         .anyRequest().authenticated());
 
         httpSecurity.oauth2ResourceServer(oathu2 ->
@@ -39,7 +43,7 @@ public class SecurityConfig {
 
     @Bean
     JwtDecoder jwtDecoder(){
-        SecretKeySpec secretKey = new SecretKeySpec(signKey.getBytes(), "HS512");
+        SecretKeySpec secretKey = new SecretKeySpec(SIGNER_KEY.getBytes(), "HS512");
 
         return NimbusJwtDecoder
                 .withSecretKey(secretKey)

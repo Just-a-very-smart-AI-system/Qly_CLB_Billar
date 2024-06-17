@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -15,4 +17,5 @@ public class UserRequest {
     private String password;
     private Staff staff;
     private String staffId;
+    private HashSet<String> Roles = new HashSet<>();
 }
