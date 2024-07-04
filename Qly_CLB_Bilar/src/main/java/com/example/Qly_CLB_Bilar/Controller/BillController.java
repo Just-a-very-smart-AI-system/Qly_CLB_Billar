@@ -38,7 +38,7 @@ public class BillController {
     public Iterable<Bill>FindByDate(@RequestParam("date")LocalDate date){
         return billService.FindByDate(date);
     }
-    @GetMapping("/findatebw")
+    @GetMapping("/finddatebw")
     public Iterable<Bill>FindByDateBW(@RequestParam LocalDate dateStart, @RequestParam() LocalDate dateEnd){
         return billService.FindByDateBW(dateStart, dateEnd);
     }

@@ -23,7 +23,7 @@ public class User {
     @ManyToOne
     private Staff staff;
 
-    @Column(name = "roles", nullable = false, length = 50)
-    @ElementCollection(fetch = FetchType.EAGER)
-    private Set<String> roles = new HashSet<>();
+    @ManyToMany
+    private Set<Roles> roles;
+
 }

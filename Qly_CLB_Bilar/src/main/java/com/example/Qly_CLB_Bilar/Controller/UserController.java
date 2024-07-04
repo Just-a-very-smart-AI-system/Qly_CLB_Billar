@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -20,12 +21,13 @@ public class UserController {
     private UserService userService;
     @Autowired
     private UserRepository userRepository;
+    @PreAuthorize("hasAuthority('SCOPE_GET_DATA')")
     @GetMapping("/getall")
     public Iterable<User> GetAll(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         log.info("UserName: {}", authentication.getName());
         authentication.getAuthorities().forEach(grantedAuthority -> log.info(grantedAuthority.getAuthority()));
-        return userRepository.findAll();
+        return userService.FindAll();
     }
     @GetMapping("/getmyinfo")
     public User GetMyUser(){
@@ -36,5 +38,10 @@ public class UserController {
     @PostMapping("/create")
     public User Craete(@RequestBody UserRequest userRequest){
         return userService.Create(userRequest);
+    }
+    @PutMapping("/update")
+    @PreAuthorize("hasAnyAuthority('SCOPE_UPDATE_DATA')")
+    public User Update(@RequestBody UserRequest request){
+        return userService.Update(request);
     }
 }

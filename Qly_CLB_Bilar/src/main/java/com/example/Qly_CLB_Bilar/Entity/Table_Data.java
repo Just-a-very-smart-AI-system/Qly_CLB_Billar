@@ -4,6 +4,8 @@ package com.example.Qly_CLB_Bilar.Entity;
 import com.example.Qly_CLB_Bilar.Entity.Enum.TableStatus;
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 @Entity
 public class Table_Data {
 
@@ -23,6 +25,7 @@ public class Table_Data {
     @Enumerated(EnumType.STRING)
     @Column(name = "Status", nullable = false, length = 10)
     private TableStatus status;
+
 
     public Table_Data() {
     }
