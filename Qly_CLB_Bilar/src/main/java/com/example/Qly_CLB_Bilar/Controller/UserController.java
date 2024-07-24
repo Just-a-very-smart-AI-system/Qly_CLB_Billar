@@ -21,7 +21,7 @@ public class UserController {
     private UserService userService;
     @Autowired
     private UserRepository userRepository;
-    @PreAuthorize("hasAuthority('SCOPE_GET_DATA')")
+    @PreAuthorize("hasAuthority('SCOPE_GET_DATA') and hasAuthority('SCOPE_ROLE_ADMIN')")
     @GetMapping("/getall")
     public Iterable<User> GetAll(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

@@ -7,9 +7,6 @@ import com.example.Qly_CLB_Bilar.DTO.JWT.AuthenticationResponse;
 import com.example.Qly_CLB_Bilar.DTO.JWT.IntrospectResponse;
 import com.example.Qly_CLB_Bilar.Service.AuthenticationService;
 import com.nimbusds.jose.JOSEException;
-import lombok.AccessLevel;
-import lombok.RequiredArgsConstructor;
-import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,16 +18,13 @@ import java.text.ParseException;
 
 @RestController
 @RequestMapping("/auth")
-@RequiredArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class AuthenticationController {
     @Autowired
     private AuthenticationService authenticationService;
     @PostMapping("/token")
-    ApiResponse<AuthenticationResponse> Authenticate(@RequestBody LogInRequest logInRequest){
+    AuthenticationResponse Authenticate(@RequestBody LogInRequest logInRequest){
         AuthenticationResponse result = authenticationService.Authenticate(logInRequest);
-        return ApiResponse.<AuthenticationResponse>builder()
-                .result(result)
+        return AuthenticationResponse.builder().token(result.getToken()).Signed(result.isSigned())
                 .build();
     }
     @PostMapping("/introspect")
