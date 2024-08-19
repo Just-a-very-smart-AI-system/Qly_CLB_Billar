@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/bill")
@@ -67,6 +69,10 @@ public class BillController {
     @PutMapping("/update/{Id}")
     public Bill Update(@PathVariable("Id") String Id, @RequestBody BillRequset bill){
         return billService.Update(Id, bill);
+    }
+    @GetMapping("/revenue/hourly/today")
+    public Map<Integer, Float> getTodayRevenueByHour() {
+        return billService.getTodayRevenueByHour();
     }
 
 }

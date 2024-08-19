@@ -13,8 +13,10 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.HashMap;
 import java.util.List;
 import java.sql.Timestamp;
+import java.util.Map;
 
 import static com.example.Qly_CLB_Bilar.Entity.Enum.BillStatus.CHƯA_THANH_TOÁN;
 import static com.example.Qly_CLB_Bilar.Entity.Enum.BillStatus.ĐÃ_THANH_TOÁN;
@@ -116,5 +118,27 @@ public class BillService {
     }
     public Iterable<DetailBill> FindDetailBill(Bill bill){
         return detailBillRepository.findByBill(bill);
+    }
+
+
+    public Map<Integer, Float> getTodayRevenueByHour() {
+        LocalDate today = LocalDate.now();
+        LocalTime startTime = LocalTime.of(0, 0); // Bắt đầu từ 0:00
+        LocalTime endTime = LocalTime.of(23, 59); // Kết thúc vào 23:59
+
+        List<Bill> bills = billRepository.findByDate(today);
+
+        Map<Integer, Float> revenueByHour = new HashMap<>();
+        for (int hour = 0; hour < 24; hour++) {
+            revenueByHour.put(hour, 0f); // Khởi tạo tất cả các giờ
+        }
+
+        for (Bill bill : bills) {
+            int hour = bill.getTime_arrive().getHour();
+            float currentRevenue = revenueByHour.getOrDefault(hour, 0f);
+            revenueByHour.put(hour, currentRevenue + bill.getPaid());
+        }
+
+        return revenueByHour;
     }
 }
